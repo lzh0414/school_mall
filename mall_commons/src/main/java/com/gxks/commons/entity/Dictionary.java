@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 /**
  * 字典数据实体，与数据库 dictionary 表映射
+ * @author Mr.gao
  */
 @Data
 @NoArgsConstructor
