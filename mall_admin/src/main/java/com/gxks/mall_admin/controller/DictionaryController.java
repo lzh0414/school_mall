@@ -34,7 +34,6 @@ public class DictionaryController {
     @GetMapping("/admin/dictionary/delete/{id}")
     public String delete(@PathVariable Long id , Model model){
         ResponseData result = new ResponseData();
-        log.info("new Log.");
         try {
             restTemplate.delete(DICTIONARY_URL + "dic/dictionary/" + id);
             result.setCode(200);
