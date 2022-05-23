@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 工程坐标 -->
+    <groupId>com.gxks</groupId>
+    <artifactId>school_mall</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <!-- 子模块列表 -->
+    <modules>
+        <module>mall_commons</module>
+        <module>mall_dictionary</module>
+        <module>mall_admin</module>
+    </modules>
+
+    <!-- 定义工程整体标准属性 -->
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <springboot.version>2.6.7</springboot.version>
+        <lombok.version>1.18.24</lombok.version>
+        <mysql.version>5.1.49</mysql.version>
+        <druid.version>1.2.9</druid.version>
+        <mybatis.spring.version>2.2.2</mybatis.spring.version>
+        <mp.version>3.5.1</mp.version>
+        <commons.version>1.0-SNAPSHOT</commons.version>
+    </properties>
+
+    <!-- 规定工程整体的依赖版本 -->
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- 配置公共模块模板 -->
+            <dependency>
+                <groupId>com.gxks</groupId>
+                <artifactId>mall_commons</artifactId>
+                <version>${commons.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- 配置 SpringBoot 模板 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <!-- import 必须 配合 <type>pom</type> 使用，表示引入一个父膜板
+                    import 相当于一个占位符，当前dependency并不会直接生效，而是将他内部的内容导入进来
+                -->
+                <scope>import</scope>
+            </dependency>
+            <!-- 配置 druid 数据源模板 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- 配置 mybatis 模板 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
+            <!-- 配置 mybatis-plus 模板 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mp.version}</version>
+            </dependency>
+
+            <!-- 配置 devtools 模板 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <version>${springboot.version}</version>
+                <scope>runtime</scope>
+                <!-- 定义可选依赖 -->
+                <optional>true</optional>
+            </dependency>
+            <!-- 为所有子模块引入 lombok 插件 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <optional>true</optional>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
+                <configuration>
+                    <!-- 打包时排除组件 -->
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                        <exclude>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-devtools</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

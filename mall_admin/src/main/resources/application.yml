@@ -1,0 +1,28 @@
+# 配置服务端口
+server:
+  port: 8000
+spring:
+  mvc:
+    # 开启 Rest
+    hiddenmethod:
+      filter:
+        enabled: true
+  # 配置禁用 thymeleaf 缓存
+  thymeleaf:
+    cache: false
+  servlet:
+    # 配置上传相关属性
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 50MB
+  # 配置工程名称
+  application:
+    name: mall_admin
+  # 配置数据源环境
+  datasource:
+    driver-class-name: "com.mysql.jdbc.Driver"
+    url: "jdbc:mysql:///schoolmall?useUnicode=true&characterEncoding=utf8&useSSL=false"
+    username: root
+    password: root
+
+
