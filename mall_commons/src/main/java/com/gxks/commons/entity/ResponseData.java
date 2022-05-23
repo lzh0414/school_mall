@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 /**
  * 响应内容对象
  * @author Mr.Gao
+ *
  */
 @Data
 @NoArgsConstructor
