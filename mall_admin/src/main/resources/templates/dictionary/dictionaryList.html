@@ -283,7 +283,7 @@
                   <a class="btn btn-primary m-r-5" th:href="@{/admin/dictionary/add}" href="#!"><i class="mdi mdi-plus"></i> 新增</a>
                   <a class="btn btn-success m-r-5" href="#!"><i class="mdi mdi-check"></i> 启用</a>
                   <a class="btn btn-warning m-r-5" href="#!"><i class="mdi mdi-block-helper"></i> 禁用</a>
-                  <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 删除</a>
+                  <a class="btn btn-danger" href="javascript:void(0);" onclick="del();"><i class="mdi mdi-window-close"></i> 删除</a>
                 </div>
               </div>
               <!-- 页面主题表格 -->
@@ -373,6 +373,55 @@ $(function(){
     }
 
 });
+
+  /**
+   * 批量删除函数
+   */
+  function del(){
+
+      // 准备数组存储要删除的 所有字典的 id
+      var delIds = new Array();
+      var index = 0;
+      // 定义一个判断器，用来确定用户至少选择了一条要删除的数据
+      var flag = false;
+      //获取所有页面中的字典数据的 选择框并判断是否要被删除
+      var inputs = $("input[name=dicId]");
+      inputs.each(function (){
+          // 判断每一个复选框是否被选中，如果被选中，那么将其中的值放在要删除的 id 数组中保存
+          if(this.checked){
+              delIds[index++] = this.value;
+              flag = true;
+          }
+      });
+      // 如果用户有要删除的额数据，那么使用 ajax 完成批量删除交互
+      if(flag){
+        // 给用户一个交互提示，询问用户是否确定删除
+        var boo = confirm("是否确定删除这些数据？");
+        if(!boo){
+            alert("操作取消！");
+            return false;
+        }
+          // console.log(delIds);
+        $.ajax({
+          type: "delete",
+          url: "http://localhost:8000/admin/dictionary",
+          data: {"ids" : delIds},
+          success: function(data){
+              // 判断如果响应码是 200  表示删除成功，给用户提示信息，并将视图重新定位回查询页面
+              if(data.code == 200){
+                  alert(data.message);
+                  window.location = "http://localhost:8000/admin/dictionary";
+              }else{
+                  alert(data.message);
+              }
+          },
+          dataType:"json"
+        });
+      }else{
+          alert("请至少选择一条要删除的数据！");
+      }
+  }
+
 
 function deleteConfirm(v){
   // console.log(v)

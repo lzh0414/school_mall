@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,17 @@ public class DictionaryController {
                 restTemplate.getForObject(DICTIONARY_URL + "dic/dictionary", ResponseData.class);
         model.addAttribute("result2" , result2);
         return "dictionary/dictionaryEdit";
+    }
+
+    /**
+     * 批量删除方法
+     */
+    @ResponseBody
+    @DeleteMapping("/admin/dictionary")
+    public ResponseData deleteDictionarys(@RequestParam("ids[]") Long[] ids , Model model){
+        ResponseData result = restTemplate.postForObject(DICTIONARY_URL + "dic/dictionary/deleteMany",
+                ids, ResponseData.class);
+        return result;
     }
 
     @GetMapping("/admin/dictionary/delete/{id}")

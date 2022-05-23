@@ -64,7 +64,7 @@ public class DictionaryController {
         return new ResponseData<>(500,"can not delete data by !" + id,null);
     }
 
-    @DeleteMapping("/dictionary")
+    @PostMapping("/dictionary/deleteMany")
     public ResponseData<List<Long>> updateDictionary(@RequestBody Long[] ids){
         try {
             int i = dictionaryService.delete(Arrays.asList(ids));
