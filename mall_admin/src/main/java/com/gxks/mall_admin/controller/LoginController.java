@@ -11,6 +11,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
+    public void test2(){
+        System.out.println("master");
+    }
+
     @GetMapping(value = {"/index" , "/admin/login" , "/"})
     public String toLoginPage(){
         return "login";
