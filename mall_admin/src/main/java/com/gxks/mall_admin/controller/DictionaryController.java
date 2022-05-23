@@ -2,6 +2,7 @@ package com.gxks.mall_admin.controller;
 
 import com.gxks.commons.entity.Dictionary;
 import com.gxks.commons.entity.ResponseData;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-
+@Slf4j
 @Controller
 public class DictionaryController {
 
@@ -33,7 +34,7 @@ public class DictionaryController {
     @GetMapping("/admin/dictionary/delete/{id}")
     public String delete(@PathVariable Long id , Model model){
         ResponseData result = new ResponseData();
-        System.out.println(1111);
+        log.info("new Log.");
         try {
             restTemplate.delete(DICTIONARY_URL + "dic/dictionary/" + id);
             result.setCode(200);
