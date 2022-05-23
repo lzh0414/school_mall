@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+
 @Controller
 public class DictionaryController {
 
@@ -32,6 +33,7 @@ public class DictionaryController {
     @GetMapping("/admin/dictionary/delete/{id}")
     public String delete(@PathVariable Long id , Model model){
         ResponseData result = new ResponseData();
+        System.out.println(1111);
         try {
             restTemplate.delete(DICTIONARY_URL + "dic/dictionary/" + id);
             result.setCode(200);
