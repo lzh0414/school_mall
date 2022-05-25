@@ -10,4 +10,5 @@ class MallDictionaryApplicationTests {
     void contextLoads() {
     }
 
+    System.out.print("abc");
 }
